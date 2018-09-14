@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author    = "zhangzb"
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/zhangzhibinhi/ZBPopMenuView.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/zhangzhibinhi/ZBPopMenuView.git", :commit => "2c01547" }
   s.source_files  = "PopMenuView/PopMenuView/*.{h,m,xib}"
 end
