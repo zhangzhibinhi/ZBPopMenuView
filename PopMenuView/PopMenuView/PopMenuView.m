@@ -13,7 +13,6 @@
 #define kPopupTriangleWidth 20  //  尖角宽度
 #define kPopupTriangleMargin 20 //  尖角与边缘的距离
 #define kPopupTriangleTopPointX self.frame.size.width - kPopupTriangleWidth - kPopupTriangleMargin
-#define kBorderOffset       0//0.5f
 #define kRowHeight 44
 
 @interface PopMenuView()<UITableViewDataSource, UITableViewDelegate>
@@ -80,7 +79,6 @@
     CGFloat viewH = rect.size.height;
     CGFloat strokeWidth = 1;    //边框宽度
     CGFloat borderRadius = 5;   //圆角
-    CGFloat offset = strokeWidth + kBorderOffset;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);  // 需要clear一下，设置成为透明背景
     // 画笔样式配置
@@ -90,14 +88,14 @@
     CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor); // 设置填充颜色
     // 路径配置
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context, borderRadius+offset, kPopupTriangleHeigh + offset);
-    CGContextAddLineToPoint(context, kPopupTriangleTopPointX - kPopupTriangleWidth / 2.0 + offset, kPopupTriangleHeigh + offset);
-    CGContextAddLineToPoint(context, kPopupTriangleTopPointX, offset);
-    CGContextAddLineToPoint(context, kPopupTriangleTopPointX + kPopupTriangleWidth / 2.0 +offset, kPopupTriangleHeigh+offset);
-    CGContextAddArcToPoint(context, viewW-offset, kPopupTriangleHeigh+offset, viewW-offset, kPopupTriangleHeigh+offset + borderRadius, borderRadius-strokeWidth);
-    CGContextAddArcToPoint(context, viewW-offset, viewH - offset, viewW-borderRadius-offset, viewH - offset, borderRadius-strokeWidth);
-    CGContextAddArcToPoint(context, offset, viewH - offset, offset, viewH - borderRadius - offset, borderRadius-strokeWidth);
-    CGContextAddArcToPoint(context, offset, kPopupTriangleHeigh + offset, viewW - borderRadius - offset, kPopupTriangleHeigh + offset, borderRadius-strokeWidth);
+    CGContextMoveToPoint(context, borderRadius, kPopupTriangleHeigh);
+    CGContextAddLineToPoint(context, kPopupTriangleTopPointX - kPopupTriangleWidth / 2.0, kPopupTriangleHeigh);
+    CGContextAddLineToPoint(context, kPopupTriangleTopPointX, 0);
+    CGContextAddLineToPoint(context, kPopupTriangleTopPointX + kPopupTriangleWidth / 2.0, kPopupTriangleHeigh);
+    CGContextAddArcToPoint(context, viewW, kPopupTriangleHeigh, viewW, kPopupTriangleHeigh + borderRadius, borderRadius-strokeWidth);
+    CGContextAddArcToPoint(context, viewW, viewH, viewW-borderRadius, viewH, borderRadius-strokeWidth);
+    CGContextAddArcToPoint(context, 0, viewH, 0, viewH - borderRadius, borderRadius-strokeWidth);
+    CGContextAddArcToPoint(context, 0, kPopupTriangleHeigh, viewW - borderRadius, kPopupTriangleHeigh, borderRadius-strokeWidth);
     CGContextClosePath(context);
     // 开始绘制
     CGContextDrawPath(context, kCGPathFillStroke);
